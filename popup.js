@@ -69,7 +69,6 @@ function onDelete(event){
     const bookmarkItem = event.target.parentNode.parentNode;
     const idToRemove = bookmarkItem.getAttribute("bookmark-id");
     bookmarkItem.remove();
-
     deleteItemFromStorage(idToRemove);
 }
 

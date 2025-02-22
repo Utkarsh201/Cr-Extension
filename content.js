@@ -4,7 +4,6 @@ const AZ_Problem_Key = "AZ_Problem_Key";
 const observer = new MutationObserver(() => {
     addBookmarkButton();
 });
-
 observer.observe(document.body, {childList: true, subtree: true});
 
 addBookmarkButton();
@@ -23,9 +22,7 @@ function addBookmarkButton(){
     bookmarkButton.style.height = "30px";
     bookmarkButton.style.height = "30px";
     const ask_btn = document.getElementsByClassName("coding_ask_doubt_button__FjwXJ")[0];
-
     ask_btn.parentElement.insertAdjacentElement("afterend", bookmarkButton);
-
     bookmarkButton.addEventListener("click", addNewBookmarkHandler);
 }
 
@@ -38,12 +35,13 @@ async function addNewBookmarkHandler(){
     for (const bookmark of currentBookmark || []) {
         if (bookmark.id === uniqueid) return;
     }
-    
+      
     const bookmarkobj = {
         id : uniqueid,
         name : problemname,
         url : azproblemurl
     }
+
     const newbookmarks = [...currentBookmark, bookmarkobj];
 
     chrome.storage.sync.set({AZ_Problem_Key:newbookmarks}, () =>{
@@ -63,4 +61,4 @@ function getcurrentBookMarkUrl(){
             resolve(results[AZ_Problem_Key] || []);
         });
     });
-}   
+}
