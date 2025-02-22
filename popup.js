@@ -3,11 +3,10 @@ const AZ_PROBLEM_KEY = "AZ_PROBLEM_KEY";
 const assetsURLMap = {
     "play": chrome.runtime.getURL("assets/play.png"),
     "delete": chrome.runtime.getURL("assets/delete.png")
+
 }
 
-
 const bookmarkSection = document.getElementById("bookmarks");
-
 
 document.addEventListener("DOMContentLoaded", () => {
     chrome.storage.sync.get([AZ_PROBLEM_KEY], (data) => {
@@ -16,8 +15,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 });
 
-
-
 function viewBookmarks(bookmarks) {
     bookmarkSection.innerHTML = "";
 
@@ -25,7 +22,9 @@ function viewBookmarks(bookmarks) {
         bookmarkSection.innerHTML = "<i>No Bookmarks to Show</i>";
         return;
     }
+
     bookmarks.forEach(bookmark => addNewBookmark(bookmark));
+
 }
 
 function addNewBookmark(bookmark){
@@ -40,10 +39,8 @@ function addNewBookmark(bookmark){
     setControlAttributes(assetsURLMap["delete"], onDelete, bookmarkControls);
     bookmarkControls.classList.add("bookmark-controls");
     
-
     newBookmark.classList.add("bookmark");
 
-    
     newBookmark.append(bookmarkTitle);
     newBookmark.append(bookmarkControls);
 
@@ -69,6 +66,7 @@ function onDelete(event){
     const bookmarkItem = event.target.parentNode.parentNode;
     const idToRemove = bookmarkItem.getAttribute("bookmark-id");
     bookmarkItem.remove();
+
     deleteItemFromStorage(idToRemove);
 }
 
